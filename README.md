@@ -1,11 +1,6 @@
 # Sistemas de Bancos de Dados 1 
 
-## Grupo 5 - Jolly Roger
-
-O Jolly Roger é um jogo ambientado num mundo de piratas, em que o objetivo é seguir as pistas e derrotar inimigos até encontrar o tesouro final.
-
----
-## Integrantes do grupo
+## Grupo 5 - Integrantes 
 
 | Nome | Matrícula |
 | - | - |

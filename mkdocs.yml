@@ -1,0 +1,15 @@
+site_name: "Jolly Roger"
+
+theme:
+  favicon: assets/logo.png
+  name: material
+  logo: assets/logo.png
+  language: pt
+  features:
+    - navigation.instant
+  palette:
+    primary: teal
+    accent: teal
+
+nav:
+  - Página inicial: index.md
