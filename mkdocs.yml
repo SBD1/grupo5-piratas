@@ -13,3 +13,4 @@ theme:
 
 nav:
   - Página inicial: index.md
+  - Módulo 1: modulo1/mer.md
