@@ -1,0 +1,132 @@
+Modelo Relacional
+
+Navio = { nome_nav, Vida, Dano, VelocidadeDeAtaque, Capacidade, Fama }
+
+Nome: Conjunto de nomes possíveis para os navios que o jogador pode jogar durante o jogo - string de 35 caracteres
+
+Vida: Conjunto de pontos de vida possíveis para o jogador - número inteiro de 0 a 1000
+
+Dano: Conjunto de pontos de dano possíveis que o Navio pode infligir em seus inimigos - inteiro de 0 a 100
+
+VelocidadeDeAtaque: Conjunto de pontos de velocidade de ataque possíveis que o jogador pode ter para poder ter a chance de atacar primeiro em um combate - inteiro de 1 a 100
+
+Capacidade: Conjunto de pontos de capacidade possíveis que o Navio pode ter para carregar tripulantes - inteiro de 2 a 9
+
+Tripulante = { Id_trip, PorcentagemDeEsquiva, PorcentagemDeAcerto, Nome, Tipo, Cura }
+
+id_trip: Conjunto de números de identificação dos tripulantes do navio - 1 a 20
+
+PorcentagemDeEsquiva: Conjunto de números em porcentagem que mostra a chance que o navio tem de receber danos - inteiro entre 0 e 100
+
+PorcentagemDeAcerto: Conjunto de números em porcentagem que mostra a chance que o navio tem de causar danos - inteiro entre 0 e 100
+
+Nome: Conjunto de nome possíveis para serem dados a um tripulante - string de 35 caracteres
+
+Tipo: Conjunto de tipos de um tripulante - string de 15 caracteres
+
+Cura: Conjunto de pontos que equivalem a cura para a vida do navio - inteiro entre 0 e 1000
+
+Inimigo = { Id_ini, Nome, Dano, Vida, VelocidadeDeAtaque, AtaqueEspecial }
+
+id_ini: Conjunto de números de identificação dos inimigos do jogo - número inteiro de 1 a 20
+
+Nome: Conjunto de nomes possíveis para os inimigos que o jogador pode encontrar durante o jogo - string de 35 caracteres
+
+Vida: Conjunto de pontos de vida possíveis para os inimigos - número inteiro de 0 a 1000
+
+VelocidadeDeAtaque: Conjunto de pontos de velocidade de ataque possíveis que o inimigo pode ter para poder ter a chance de atacar primeiro em um combate - inteiro de 1 a 100
+
+AtaqueEspecial: ?
+
+Inventário = { Id_inv, Tamanho }
+
+Item = { Id_item, Nome, Quantidade, Tipo }
+
+Id_item: Conjunto de números de identificação possíveis que identificam cada item do jogo - inteiro entre 1 e 500
+
+Nome: Conjunto de nomes possíveis para os itens que um navio pode obter no jogo - string de 50 caracteres
+
+Quantidade - - inteiro de 0 a 100
+
+Tipo - - string de 100 caracteres
+
+Canhões = { Id_item, Nome, Quantidade, Adição de velocidade de ataque, Adição de ataque}
+
+Id_item: Conjunto de números de identificação possíveis que identificam cada item do jogo - inteiro entre 1 e 500
+
+Nome: Conjunto de nomes possíveis que uma vela pode ter. - string de 100 caracteres
+
+Casco = { Id_item, Nome, Quantidade, Adição de vida}
+
+Id_item: Conjunto de números de id possíveis que identificam cada item do jogo. - inteiro entre 1 e 500
+
+
+Vela = { Id_item, Nome, Quantidade, Melhora Chance de esquiva}
+
+Id_item: Conjunto de números de id possíveis que identificam cada item do jogo. - inteiro entre 1 e 500
+
+Nome: Conjunto de nomes possíveis que uma vela pode ter. - string de 100 caracteres
+
+
+Luneta = { Id_item, Nome, Quantidade, Melhora Chance de acerto}
+
+Id_item: Conjunto de números de id possíveis que identificam cada item do jogo. - inteiro entre 1 e 500
+
+Nome: Conjunto de nomes possíveis que uma luneta pode ter. string de 100 caracteres
+
+
+Itens especiais = { Id_item, Nome, Quantidade, Efeitos, Cooldown}
+
+Id_item: Conjunto de números de id possíveis que identificam cada item do jogo. - inteiro entre 1 e 500
+
+Nome: Conjunto de nomes possíveis que um item especial pode ter. - string de 100 caracteres
+
+Quantidade: Quantidade de unidades de um item especial em específico que consta nom no inventário do jogador. - inteiro entre 1 e 500
+
+Batalha = { Id_bat, nome_nav, Id_ini}
+
+id_bat: Conjunto de números de id possíveis que identificam cada batalha do jogo. - inteiro entre 1 e 500
+
+nome_nav: Conjunto de nomes possíveis para os navios que o jogador pode jogar durante o jogo - string de 35 caracteres
+
+id_ini: Conjunto de números de identificação dos inimigos do jogo - número inteiro de 1 a 20
+
+Area = { Id_area, CoordenadaX, CoordenadaY, Tipo }
+
+id_area: Conjunto de números de id possíveis que identificam cada área do jogo. - inteiro entre 1 e 500
+
+CooredenadaX: Conjunto de números para identificar uma área na vertical - inteiro entre 1 e 10
+
+CoordenadaY: Conjunto de números para identificar uma área na vertical - inteiro entre 1 e 10
+
+Tipo: Conjunto de tipos de areas - string de 40 caracteres
+
+Agua = { Id_area, CoordenadaX, CoordenadaY, Dano}
+
+id_area: Conjunto de números de id possíveis que identificam cada área do jogo. - inteiro entre 1 e 500
+
+CooredenadaX: Conjunto de números para identificar uma área na vertical - inteiro entre 1 e 10
+
+CoordenadaY: Conjunto de números para identificar uma área na vertical - inteiro entre 1 e 1
+
+Dano: Conjunto de pontos de dano possíveis que a água pode infligir ao navio - inteiro de 0 a 100.
+
+Porto = { Id_area, CoordenadaX, CoordenadaY, Dica }
+
+id_area: Conjunto de números de id possíveis que identificam cada área do jogo. - inteiro entre 1 e 500
+
+CooredenadaX: Conjunto de números para identificar uma área na vertical - inteiro entre 1 e 10
+
+CoordenadaY: Conjunto de números para identificar uma área na vertical - inteiro entre 1 e 10
+
+Dica: Frases com dicas para direcionamentos do jogador - string de 200 caracteres
+
+Base = { Id_area, CoordenadaX, CoordenadaY, Cura }
+
+id_area: Conjunto de números de id possíveis que identificam cada área do jogo. - inteiro entre 1 e 500
+
+CooredenadaX: Conjunto de números para identificar uma área na vertical - inteiro entre 1 e 10
+
+CoordenadaY: Conjunto de números para identificar uma área na vertical - inteiro entre 1 e 1
+
+Cura: Pontos de vida restaurados do navio ao chegar na base - inteiro entre 1 a 1000
