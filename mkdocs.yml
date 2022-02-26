@@ -14,4 +14,6 @@ theme:
 nav:
   - Página inicial: index.md
   - Módulo 1: modulo1/mer.md
-  - Módulo 2: modulo2/modelo-relacional.md
+  - Módulo 2: 
+    - Modelo Relacional: modulo2/modelo-relacional.png
+    - Legendas do modelo relacional: modulo2/modelo-relacional.png
