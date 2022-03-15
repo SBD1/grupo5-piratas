@@ -4,8 +4,7 @@
 **Jolly Roger** é um jogo (no estilo RPG) que é ambientado num mundo de piratas. A história se inicia com um navio tripulado o qual o jogador deve comandar. A partir daí, ele recebe um mapa inicial com as coordenadas de alguns lugares importantes, como o Porto e a localização do primeiro inimigo. 
 
 Dessa forma, jogador irá navegar por áreas do jogo que podem ser do tipo Terra (Porto ou Base) ou do tipo Água (Normal ou Perigosa).  
-- Porto → pode contratar tripulantes e obter dicas e itens;  
-- Base → pode curar o navio;   
+- Porto → pode contratar tripulantes, obter dicas e itens e pode curar o navio;     
 - Água Perigosa → causa dano;  
 - Água Normal → não causa dano.   
 
@@ -27,5 +26,5 @@ Durante essa jornada, ele encontrará alguns itens que o ajudarão a ganhar as b
 Ao derrotar o inimigo final, o jogador enfim encontra o tesouro e ganha a partida, mas caso seja derrotado por algum dos adversários, ele perde o jogo. 
 
 
-<iframe frameborder="0" style="width:100%;height:1201px;" src="https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000FF&edit=_blank&layers=1&nav=1&page-id=vR_l3F_6vYPFeBj1SGFU&title=MR_Jolly_Roger.drawio.html#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1jSxhXJrBEThwAZ0KP-_x-QShStZyH556%26export%3Ddownload"></iframe>
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FqYWUW8ZPa40C7mXQWl7w2J%2FDER---Jolly-Roger%3Fnode-id%3D0%253A1" allowfullscreen></iframe>
 
