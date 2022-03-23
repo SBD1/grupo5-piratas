@@ -1,7 +1,7 @@
 # Modelo Entidade-Relacionamento 
 
 
-**Jolly Roger** é um jogo (no estilo RPG) que é ambientado num mundo de piratas. A história se inicia com um navio tripulado o qual o jogador deve comandar. A partir daí, ele recebe um mapa inicial com as coordenadas de alguns lugares importantes, como o Porto e a localização do primeiro inimigo. 
+**Jolly Roger** é um jogo (no estilo RPG) que é ambientado num mundo de piratas. A história se inicia com um navio tripulado o qual o jogador deve comandar. A partir daí, o jogador deve desbravar o mapa com o objetivo de derrotar inimigos poderosos. ele recebe um mapa inicial com as coordenadas de alguns lugares importantes, como o Porto e a localização do primeiro inimigo.
 
 Dessa forma, jogador irá navegar por áreas do jogo que podem ser do tipo Terra (Porto ou Base) ou do tipo Água (Normal ou Perigosa).  
 

@@ -1,3 +1,3 @@
 # Modelo Relacional
 
-![Modelo Relacional](../assets/modelo-relacional.png)
+![Modelo Relacional](../images/MRelacional.jpg);
