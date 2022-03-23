@@ -14,4 +14,4 @@
 
 ---
 
-![](../images/MrNormalizado.png)
+![](../images/MrNormalizado.jpg)
