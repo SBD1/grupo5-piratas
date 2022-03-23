@@ -10,7 +10,7 @@
 **(Atributos comuns não dependem transitivamente de qualquer superchave)**
 
 ## Quarta Forma Normal
-**(Atributos comuns não dependem transitivamente de qualquer superchave)**
+**(Atributos não possuem depedências funcionais multivaloradas)**
 
 ---
 
