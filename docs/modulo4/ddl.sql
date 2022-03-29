@@ -1,287 +1,227 @@
 CREATE TABLE Navio(  
- IdNav NUMERIC(4) NOT NULL,  
+ IdNav SERIAL PRIMARY KEY,  
  Nome VARCHAR(50) NOT NULL,  
- Vida NUMERIC(4) DEFAULT 100,  
- Dano NUMERIC(4) DEFAULT 10,  
- VelocidadeDeAtaque NUMERIC(4) DEFAULT 10,  
+ Vida INTEGER DEFAULT 100,  
+ Dano INTEGER DEFAULT 10,  
+ VelocidadeDeAtaque INTEGER DEFAULT 10,  
  Capacidade NUMERIC(1) DEFAULT 2,  
- Fama NUMERIC(4) DEFAULT 0,  
-   
- CONSTRAINT NavioPk PRIMARY KEY(IdNav),  
+ Fama INTEGER DEFAULT 0,  
+
  CONSTRAINT NavioCk CHECK(Capacidade > 1)  
 ); 
 
  
-CREATE TABLE TipoTripulante(  
- IdTrip NUMERIC(4) NOT NULL,  
- Tipo VARCHAR(20) NOT NULL,  
-   
- CONSTRAINT TripPk PRIMARY KEY(IdTrip),  
- CONSTRAINT TripCk CHECK(Tipo IN  ('Capitao','Atirador','Carpinteiro'))
-); 
-
- 
 CREATE TABLE Capitao(   
-IdCapitao NUMERIC(4) NOT NULL,   
-IdTrip NUMERIC(4) NOT NULL,   
-PorcentagemDeEsquiva NUMERIC(4) DEFAULT 1,  
+IdCapitao SERIAL PRIMARY KEY,   
+IdTrip INTEGER NOT NULL,   
+PorcentagemDeEsquiva INTEGER DEFAULT 1,  
 
-CONSTRAINT CapitaoFk FOREIGN KEY(IdTrip) REFERENCES TipoTripulante(IdTrip),   
-Constraint CapitaoPk PRIMARY KEY(IdCapitao)   
+CONSTRAINT CapitaoFk FOREIGN KEY(IdTrip) REFERENCES TipoTripulante(IdTrip)
 ); 
 
 
 CREATE TABLE Atirador(   
-IdAtirador NUMERIC(4) NOT NULL,   
-IdTrip NUMERIC(4) NOT NULL,   
+IdAtirador SERIAL PRIMARY KEY,   
+IdTrip INTEGER NOT NULL,   
 PorcentagemDeAcerto NUMERIC(10) DEFAULT 1,   
 
-CONSTRAINT AtiradorFk FOREIGN KEY(IdTrip) REFERENCES TipoTripulante(IdTrip),   
-CONSTRAINT AtiradorPk PRIMARY KEY(IdAtirador)   
+CONSTRAINT AtiradorFk FOREIGN KEY(IdTrip) REFERENCES TipoTripulante(IdTrip)
 ); 
 
 
 CREATE TABLE Carpinteiro(   
-IdCarpinteiro NUMERIC(4) NOT NULL,   
-IdTrip NUMERIC(4) NOT NULL,   
+IdCarpinteiro SERIAL PRIMARY KEY, 
+IdTrip INTEGER NOT NULL,   
 Cura NUMERIC(10) DEFAULT 1,   
 
-CONSTRAINT CarpinteiroFk FOREIGN KEY(IdTrip) REFERENCES TipoTripulante(IdTrip),   
-Constraint CarpinteiroPk PRIMARY KEY(IdCarpinteiro)   
+CONSTRAINT CarpinteiroFk FOREIGN KEY(IdTrip) REFERENCES TipoTripulante(IdTrip) 
 ); 
 
 
-CREATE TABLE Inimigo(
-IdIni NUMERIC(4,0) NOT NULL,
-Nome VARCHAR(50) NOT NULL,
-Vida NUMERIC(4) DEFAULT 100,
-Dano NUMERIC(4) DEFAULT 10,
-VelocidadeDeAtaque NUMERIC(4) DEFAULT 10,
+CREATE TABLE Tripulantes(
+IdTrip SERIAL PRIMARY KEY,
+IdCapitao INTEGER,
+IdAtirador INTEGER,
+IdCarpinteiro INTEGER,
 
-CONSTRAINT IniPk PRIMARY KEY(IdIni)
+CONSTRAINT TripCapFk FOREIGN KEY(IdTrip) REFERENCES Capitao(IdCapitao),
+CONSTRAINT TripAtirFk FOREIGN KEY(IdTrip) REFERENCES Atirador(IdAtirador), 
+CONSTRAINT TripCarFk FOREIGN KEY(IdTrip) REFERENCES Carpinteiro(IdCarpinteiro) 
 );
 
 
-CREATE TABLE InstanciaInimigo( 
-IdInstanciaInimigo NUMERIC(4), 
-IdIni NUMERIC(4), 
-PosX NUMERIC(4), 
-PosY NUMERIC(4),
- 
-CONSTRAINT InstanciaInimigoPk PRIMARY KEY(IdInstanciaInimigo), 
-CONSTRAINT InstanciaInimigoIdFk FOREIGN KEY(IdIni) REFERENCES inimigo(idini), 
-CONSTRAINT InstanciaInimigoPosFk FOREIGN KEY(PosX, PosY) REFERENCES area(posx, posy)
+CREATE TABLE TipoArea(
+IdTipoArea SERIAL PRIMARY KEY,
+Tipo VARCHAR(20) NOT NULL,
+
+CONSTRAINT TipoAreaCk CHECK(Tipo IN  ('Agua','Porto'))
 );
+
 
 CREATE TABLE Area(
-PosX NUMERIC(4),
-PosY NUMERIC(4),
-TipoArea VARCHAR(20),
+PosX INTEGER NOT NULL,
+PosY INTEGER NOT NULL,
+TipoArea INTEGER,
 
 CONSTRAINT AreaPk PRIMARY KEY(PosX, PosY),
-CONSTRAINT AreaCk Check(TipoArea IN ('Agua', 'Porto', 'Eventos Aleatorios', 'Contrato'))
+CONSTRAINT AreaTipoFk FOREIGN KEY(TipoArea) REFERENCES tipoarea(IdTipoArea)
 );
 
 
 CREATE TABLE Agua( 
-PosX NUMERIC(4), 
-PosY NUMERIC(4), 
-Dano NUMERIC(4), 
+IdAgua SERIAL PRIMARY KEY,
+PosX INTEGER NOT NULL, 
+PosY INTEGER NOT NULL,
+Dano INTEGER NOT NULL,
 
-CONSTRAINT AguaPk PRIMARY KEY(PosX, PosY) 
+CONSTRAINT AguaPosFk FOREIGN KEY(PosX, PosY) REFERENCES area(posx, posy)
 );
 
 
 CREATE TABLE Porto( 
-PosX NUMERIC(4), 
-PosY NUMERIC(4), 
+IdPorto SERIAL PRIMARY KEY,
+PosX INTEGER NOT NULL, 
+PosY INTEGER NOT NULL, 
 Dica VARCHAR(100), 
-Cura NUMERIC(4), 
+Cura INTEGER, 
 
-CONSTRAINT PortoPk PRIMARY KEY(PosX, PosY) 
+CONSTRAINT PortoPosFk FOREIGN KEY(PosX, PosY) REFERENCES area(posx, posy)
 );
 
 
 CREATE TABLE Contrato( 
-IdContrato NUMERIC(4), 
-PosX NUMERIC(4), 
-PosY NUMERIC(4), 
-Fama NUMERIC(4), 
-Ouro NUMERIC(4), 
+IdContrato SERIAL PRIMARY KEY, 
+PosX INTEGER NOT NULL, 
+PosY INTEGER NOT NULL, 
+Fama INTEGER, 
+Ouro INTEGER, 
 
-CONSTRAINT ContratoPk PRIMARY KEY(IdContrato), 
 CONSTRAINT ContratoPosFK FOREIGN KEY(PosX, PosY) REFERENCES area(posx, posy) 
 );
 
 
 CREATE TABLE EventosAleatorios( 
-IdEvento NUMERIC(4), 
-PosX NUMERIC(4), 
-PosY NUMERIC(4), 
-Dano NUMERIC(4), 
-Ouro NUMERIC(4), 
-Fama NUMERIC(4), 
-CURA NUMERIC(4),
+IdEvento SERIAL PRIMARY KEY, 
+PosX INTEGER NOT NULL, 
+PosY INTEGER NOT NULL, 
+Dano INTEGER, 
+Ouro INTEGER, 
+Fama INTEGER, 
+CURA INTEGER,
 
-CONSTRAINT EventosAleatoriosPK PRIMARY KEY(IdEvento), 
 CONSTRAINT EvemtosAleatoriosPosFk FOREIGN KEY(PosX, PosY) REFERENCES area(posx, posy) 
 );
 
 
 CREATE TABLE Inimigo( 
-IdIni NUMERIC(4,0) NOT NULL, 
+IdIni SERIAL PRIMARY KEY, 
 Nome VARCHAR(50) NOT NULL, 
-Vida NUMERIC(4) DEFAULT 100, 
-Dano NUMERIC(4) DEFAULT 10, 
-VelocidadeDeAtaque NUMERIC(4) DEFAULT 10, 
-
-CONSTRAINT IniPk PRIMARY KEY(IdIni) 
+Vida INTEGER DEFAULT 100, 
+Dano INTEGER DEFAULT 10, 
+VelocidadeDeAtaque INTEGER DEFAULT 10
 ); 
 
  
 CREATE TABLE InstanciaInimigo( 
-IdInstanciaInimigo NUMERIC(4), 
-IdIni NUMERIC(4), 
-PosX NUMERIC(4), 
-PosY NUMERIC(4), 
- 
-CONSTRAINT InstanciaInimigoPk PRIMARY KEY(IdInstanciaInimigo), 
+IdInstanciaInimigo SERIAL PRIMARY KEY, 
+IdIni INTEGER NOT NULL, 
+PosX INTEGER NOT NULL, 
+PosY INTEGER NOT NULL, 
+  
 CONSTRAINT InstanciaInimigoIdFk FOREIGN KEY(IdIni) REFERENCES inimigo(idini), 
 CONSTRAINT InstanciaInimigoPosFk FOREIGN KEY(PosX, PosY) REFERENCES area(posx, posy) 
 ); 
-
- 
-CREATE TABLE Area( 
-PosX NUMERIC(4), 
-PosY NUMERIC(4), 
-TipoArea VARCHAR(20),
-
-CONSTRAINT AreaPk PRIMARY KEY(PosX, PosY), 
-CONSTRAINT AreaCk Check(TipoArea IN ('Agua', 'Porto', 'Eventos Aleatorios', 'Contrato')) 
-); 
  
 
-CREATE TABLE Agua( 
-PosX NUMERIC(4), 
-PosY NUMERIC(4), 
-Dano NUMERIC(4), 
-
-CONSTRAINT AguaPk PRIMARY KEY(PosX, PosY) 
-); 
- 
-
-CREATE TABLE Porto( 
-PosX
-NUMERIC(4), 
-PosY NUMERIC(4), 
-Dica VARCHAR(100), 
-Cura NUMERIC(4), 
-
-CONSTRAINT PortoPk PRIMARY KEY(PosX, PosY) 
-); 
- 
-
-CREATE TABLE Contrato( 
-IdContrato NUMERIC(4), 
-PosX NUMERIC(4), 
-PosY NUMERIC(4), 
-Fama NUMERIC(4), 
-Ouro NUMERIC(4), 
-
-CONSTRAINT ContratoPk PRIMARY KEY(IdContrato), 
-CONSTRAINT ContratoPosFK FOREIGN KEY(PosX, PosY) REFERENCES area(posx, posy) 
-); 
- 
- 
-CREATE TABLE EventosAleatorios( 
-IdEvento NUMERIC(4), 
-PosX NUMERIC(4), 
-PosY NUMERIC(4), 
-Dano NUMERIC(4), 
-Ouro NUMERIC(4), 
-Fama NUMERIC(4), 
-CURA NUMERIC(4), 
-
-CONSTRAINT EventosAleatoriosPK PRIMARY KEY(IdEvento), 
-CONSTRAINT EvemtosAleatoriosPosFk FOREIGN KEY(PosX, PosY) REFERENCES area(posx, posy) 
-);
-
-
-CREATE TABLE Item(
-IdItem NUMERIC(4) NOT NULL,
-Nome VARCHAR(20),
-Quantidade NUMERIC(4),
-Tipo VARCHAR(20),
-
-CONSTRAINT ItemPk PRIMARY KEY(IdItem),
-CONSTRAINT ItemCk CHECK(Tipo IN ('Canhao', 'Casco', 'Luneta', 'Item Especial'))
+CREATE TABLE TipoItem(
+IdItem SERIAL PRIMARY KEY,  
+Tipo VARCHAR(20) NOT NULL,
+Quantidade INTEGER NOT NULL,
+   
+CONSTRAINT ItemCk CHECK(Tipo IN  ('Canhao','Casco','Vela','Luneta', 'Item Especial'))
 );
 
 
 CREATE TABLE Canhao (
-IdItem NUMERIC(4) NOT NULL,
-Nome VARCHAR(40),
-Quantidade NUMERIC(4),
-AdicaoVelocidadeAtaque NUMERIC(4),
-AdicaoAtaque NUMERIC(4),
+IdCanhao SERIAL PRIMARY KEY,
+IdItem INTEGER NOT NULL,
+Nome VARCHAR(40) NOT NULL,
+AdicaoVelocidadeAtaque INTEGER NOT NULL,
+AdicaoAtaque INTEGER NOT NULL,
 
-CONSTRAINT CanhaoPk PRIMARY KEY(IdItem)
+CONSTRAINT CanhaoFk FOREIGN KEY(IdItem) REFERENCES TipoItem(IdItem)
 );
 
 
 CREATE TABLE Casco (
-IdItem NUMERIC(4) NOT NULL,
-Nome VARCHAR(40),
-Quantidade NUMERIC(4),
-AdicaoVida NUMERIC(4),
+IdCasco SERIAL PRIMARY KEY,
+IdItem INTEGER NOT NULL,
+Nome VARCHAR(40) NOT NULL,
+AdicaoVida INTEGER NOT NULL,
 
-CONSTRAINT CascoPk PRIMARY KEY(IdItem)
+CONSTRAINT CascoFk FOREIGN KEY(IdItem) REFERENCES TipoItem(IdItem)
 );
 
 
 CREATE TABLE Vela (
-IdItem NUMERIC(4) NOT NULL,
-Nome VARCHAR(40),
-Quantidade NUMERIC(4),
-AdicaoEsquiva NUMERIC(4),
+IdVela SERIAL PRIMARY KEY,
+IdItem INTEGER NOT NULL,
+Nome VARCHAR(40) NOT NULL,
+AdicaoEsquiva INTEGER NOT NULL,
 
-CONSTRAINT VelaPk PRIMARY KEY(IdItem)
+CONSTRAINT VelaFk FOREIGN KEY(IdItem) REFERENCES TipoItem(IdItem)
 );
 
 
 CREATE TABLE Luneta (
-IdItem NUMERIC(4) NOT NULL,
-Nome VARCHAR(40),
-Quantidade NUMERIC(4),
-AdicaoAcerto NUMERIC(4),
+IdLuneta SERIAL PRIMARY KEY,
+IdItem INTEGER NOT NULL,
+Nome VARCHAR(40) NOT NULL,
+AdicaoAcerto INTEGER NOT NULL,
 
-CONSTRAINT LunetaPk PRIMARY KEY(IdItem)
+CONSTRAINT LunetaFk FOREIGN KEY(IdItem) REFERENCES TipoItem(IdItem)
 );
 
 
 CREATE TABLE ItemEspecial (
-IdItem NUMERIC(4) NOT NULL,
+IdItemEspecial SERIAL PRIMARY KEY,
+IdItem INTEGER NOT NULL,
 Nome VARCHAR(40),
-Quantidade NUMERIC(4),
-ReducaoVelocidadeAtaqueInimiga NUMERIC(4),
-ReducaoAtaqueInimiga NUMERIC(4),
-ReducaoEsquivaInimiga NUMERIC(4),
-ReducaoVidaInimiga NUMERIC(4),
-ReducaoAcertoInimiga NUMERIC(4),
-Cooldown NUMERIC(4),
+ReducaoVelocidadeAtaqueInimiga INTEGER,
+ReducaoAtaqueInimiga INTEGER,
+ReducaoEsquivaInimiga INTEGER,
+ReducaoVidaInimiga INTEGER,
+ReducaoAcertoInimiga INTEGER,
+Cooldown INTEGER,
 
-CONSTRAINT ItemEspecialPk PRIMARY KEY(IdItem)
+CONSTRAINT ItemEspecialFk FOREIGN KEY(IdItem) REFERENCES TipoItem(IdItem)
+);
+
+
+CREATE TABLE Item(
+IdItem SERIAL PRIMARY KEY,
+IdCanhao INTEGER,
+IdCasco INTEGER,
+IdVela INTEGER,
+IdLuneta INTEGER,
+IdItemEspecial INTEGER,
+
+
+CONSTRAINT ItemCanhaoFk FOREIGN KEY(IdCanhao) REFERENCES Canhao(IdCanhao),
+CONSTRAINT ItemCascoFk FOREIGN KEY(IdCasco) REFERENCES Casco(IdCasco),
+CONSTRAINT ItemVelaFk FOREIGN KEY(IdVela) REFERENCES Vela(IdVela),
+CONSTRAINT ItemLunetaFk FOREIGN KEY(IdLuneta) REFERENCES Luneta(IdLuneta),
+CONSTRAINT ItemEspecialFk FOREIGN KEY(IdItemEspecial) REFERENCES ItemEspecial(IdItemEspecial)
 );
 
 
 CREATE TABLE Batalha (
-IdBat NUMERIC(4),
-IdNav NUMERIC(4),
-IdInstanciaInimigo NUMERIC(4),
-Ouro NUMERIC(4),
-Fama NUMERIC(4),
+IdBat SERIAL PRIMARY KEY,
+IdNav INTEGER,
+IdInstanciaInimigo INTEGER,
+Ouro INTEGER,
+Fama INTEGER,
 
-CONSTRAINT BatalhaPk PRIMARY KEY(IdBat),
 CONSTRAINT BatalhaNavFk FOREIGN KEY(IdNav) REFERENCES navio(idnav),
 CONSTRAINT BatalhaIniFk FOREIGN KEY(IdInstanciaInimigo) REFERENCES instanciainimigo(IdInstanciaInimigo)
 );
