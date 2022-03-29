@@ -1,40 +1,49 @@
 CREATE TABLE Navio(  
  IdNav SERIAL PRIMARY KEY,  
  Nome VARCHAR(50) NOT NULL,  
- Vida INTEGER DEFAULT 100,  
- Dano INTEGER DEFAULT 10,  
- VelocidadeDeAtaque INTEGER DEFAULT 10,  
- Capacidade NUMERIC(1) DEFAULT 2,  
+ Vida INTEGER NOT NULL,  
+ Dano INTEGER NOT NULL,  
+ VelocidadeDeAtaque INTEGER NOT NULL,  
+ Capacidade INTEGER NOT NULL,  
  Fama INTEGER DEFAULT 0,  
 
  CONSTRAINT NavioCk CHECK(Capacidade > 1)  
 ); 
 
+
+CREATE TABLE TipoTripulante(   
+ IdTrip SERIAL PRIMARY KEY,   
+ Tipo VARCHAR(20) NOT NULL,   
+     
+ CONSTRAINT TripCk CHECK(Tipo IN   
+ ('Capitao','Atirador','Carpinteiro'))   
+); 
+
  
 CREATE TABLE Capitao(   
 IdCapitao SERIAL PRIMARY KEY,   
-IdTrip INTEGER NOT NULL,   
-PorcentagemDeEsquiva INTEGER DEFAULT 1,  
+TipoTrip INTEGER NOT NULL,   
+PorcentagemDeEsquiva DECIMAL,  
 
-CONSTRAINT CapitaoFk FOREIGN KEY(IdTrip) REFERENCES TipoTripulante(IdTrip)
+CONSTRAINT CapitaoFk FOREIGN KEY(TipoTrip) REFERENCES TipoTripulante(IdTrip)
 ); 
 
 
 CREATE TABLE Atirador(   
 IdAtirador SERIAL PRIMARY KEY,   
-IdTrip INTEGER NOT NULL,   
-PorcentagemDeAcerto NUMERIC(10) DEFAULT 1,   
+TipoTrip INTEGER NOT NULL,   
+PorcentagemDeAcerto DECIMAL,   
 
-CONSTRAINT AtiradorFk FOREIGN KEY(IdTrip) REFERENCES TipoTripulante(IdTrip)
+CONSTRAINT AtiradorFk FOREIGN KEY(TipoTrip) REFERENCES TipoTripulante(IdTrip)
 ); 
 
 
 CREATE TABLE Carpinteiro(   
 IdCarpinteiro SERIAL PRIMARY KEY, 
-IdTrip INTEGER NOT NULL,   
+TipoTrip INTEGER NOT NULL,   
 Cura NUMERIC(10) DEFAULT 1,   
 
-CONSTRAINT CarpinteiroFk FOREIGN KEY(IdTrip) REFERENCES TipoTripulante(IdTrip) 
+CONSTRAINT CarpinteiroFk FOREIGN KEY(TipoTrip) REFERENCES TipoTripulante(IdTrip) 
 ); 
 
 
