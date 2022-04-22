@@ -27,7 +27,7 @@
 
 **(Atributos não possuem depedências funcionais multivaloradas)**
 
-## Fazendo a analize
+## Fazendo a análise
 
 ## Navio
 
